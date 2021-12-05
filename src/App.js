@@ -1,35 +1,42 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { v4 as uuid } from 'uuid'
 
 import Instructions from './components/Instructions'
 import AddTodoForm from './components/AddTodoForm'
 import TodoList from './components/TodoList'
-import ClearAllTodos from './components/ClearAllTodos'
 
 function App() {
-	const [todos, setTodos] = useState([{
-		"completed": false,
-		"_id": "5fa8d8ff650501046cd98312",
-		"description": "Here is something that needs doing!"
-	},
-	{
-		"completed": true,
-		"_id": "abc1230501046cd98312",
-		"description": "This one is done"
+	const [todos, setTodos] = useState([])
+
+	const updateTodo = (id, updatedTodo) => {
+		setTodos(todos.map(todo => todo._id !== id ? todo : updatedTodo))		// Sets every todo to itself or the updatedTodo
 	}
-	])
+
+	const addTodo = (description) => {
+		setTodos([...todos, { _id: uuid(), description, completed: false }])
+	}
+	
+	const deleteTodo = (id) => {
+		setTodos(todos.filter(todo => todo._id !== id))
+	}
+
+	const handleClearAll = () => {
+		// In the API we don't have a /tasks/deleteAll end-point, but here we can do it all at once
+		setTodos([])
+	}
 
 	return (
 		<div className="medium-container">
-			<nav><span>REFRESH</span> <span>ABOUT</span></nav>
+			<nav><span>ABOUT</span></nav>
 			<header>
 				<h1>React Todo App</h1>
 				<p><em>Manage all your have Todo!</em></p>
 			</header>
 			<div>
 				{todos.length === 0 && <Instructions /> }
-				<AddTodoForm />
-				<TodoList todos={todos} />
-				{todos.length > 0 && <ClearAllTodos />}
+				<AddTodoForm addTodo={addTodo} />
+				<TodoList todos={todos} updateTodo={updateTodo} deleteTodo={deleteTodo} />
+				{todos.length > 0 && <button onClick={handleClearAll} >Clear All</button>}
 			</div>
 			<footer>
 				<p>Source code on Github</p>
