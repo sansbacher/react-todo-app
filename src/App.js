@@ -1,14 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { v4 as uuid } from 'uuid'
 
 import Instructions from './components/Instructions'
 import AddTodoForm from './components/AddTodoForm'
 import TodoList from './components/TodoList'
 
+const LS_TODO_NAME = 'todo'			// The LocalStorage name
+
 function App() {
 	const [todos, setTodos] = useState([])
 
+	// Initial seeding of Todos from localStorage on first run (once) due to empty dependencies
+	useEffect(() => {
+		const importedTodos = localStorage.getItem(LS_TODO_NAME)
+		if (importedTodos) {
+			setTodos(JSON.parse(importedTodos))
+		}
+	}, [])
+
+	// For actual LocalStorage usage should use this, which updates whenever todos array is modified
+	// But once we move to APIs we will need to add API POST/PATCH/DELETE calls in the functions below
+	useEffect(() => {
+		localStorage.setItem(LS_TODO_NAME, JSON.stringify(todos))
+	}, [todos])
+
 	const updateTodo = (id, updatedTodo) => {
+		// Should not change/mutate the current state, just return an all new copy of the state
 		setTodos(todos.map(todo => todo._id !== id ? todo : updatedTodo))		// Sets every todo to itself or the updatedTodo
 	}
 

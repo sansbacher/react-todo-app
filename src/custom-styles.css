@@ -10,3 +10,13 @@ li {
 .margin-right {
 	margin-right: 0.5rem;
 }
+
+.text-completed {
+	text-decoration: line-through;
+	color: grey;
+}
+
+.text-not-completed {
+	text-decoration: none;
+	color: black;
+}

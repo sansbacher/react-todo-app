@@ -22,7 +22,7 @@ const TodoList = ({todos, updateTodo, deleteTodo}) => {
 						className="margin-right"
 						onChange={() => updateTodo(todo._id, {...todo, completed: !todo.completed})} 
 					/>
-					<span className="margin-right">{todo.description}</span>
+					<span className={`margin-right ${todo.completed ? 'text-completed' : 'text-not-completed'}`}>{todo.description}</span>
 					<button onClick={() => handleEditTodo(todo)}>EDIT</button>
 					<button onClick={() => deleteTodo(todo._id)}>DELETE</button>
 				</li>
