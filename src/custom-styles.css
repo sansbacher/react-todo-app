@@ -7,6 +7,10 @@ li {
 	list-style-type: none;
 }
 
+ul.decorated > li {
+	list-style-type: circle;
+}
+
 .margin-right {
 	margin-right: 0.5rem;
 }
@@ -19,4 +23,8 @@ li {
 .text-not-completed {
 	text-decoration: none;
 	color: black;
+}
+
+.active {							/* For React Router NavLinks  */
+	font-weight: bold;
 }
