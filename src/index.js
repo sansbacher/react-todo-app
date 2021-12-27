@@ -4,11 +4,8 @@ import { BrowserRouter } from 'react-router-dom'
 
 import App from './App'
 
-// Initial plain/non-default/semi-decent dev styles:
-import 'primitive-ui/dist/css/main.css'			// https://taniarascia.github.io/primitive/
-import './custom-styles.css'
-
-//import 'bootstrap/dist/css/bootstrap.min.css';		// Now styled with React-Bootstrap Components
+import 'bootstrap/dist/css/bootstrap.min.css'		// Now styled with React-Bootstrap Components
+import './custom-styles-bs.css'
 
 ReactDOM.render(
 	<React.StrictMode>

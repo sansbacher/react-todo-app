@@ -1,0 +1,46 @@
+html {
+	/* For the Sticky Footer */
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	/* Margin bottom by footer height */
+	margin-bottom: 60px;
+}
+
+.active {							/* For React Router NavLinks  */
+	font-weight: bold;
+}
+
+.text-completed {
+	text-decoration: line-through;
+	color: grey;
+}
+
+.text-not-completed {
+	text-decoration: none;
+	color: black;
+}
+
+.color-white, .color-white:hover {
+	color: #dddddd;
+	text-decoration: none;
+}
+
+.footer {
+	margin-left: -12px;			/* Compensate for nested Containers */
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 60px;
+	/* padding-top: 0.25rem; */
+
+	font-size: 0.75rem;
+}
+
+.footer-content {
+	/* The actual footer content should fill the whole footer */
+  height: 60px;
+}

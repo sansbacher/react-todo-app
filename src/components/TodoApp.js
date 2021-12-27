@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import {Col, Row, Button} from 'react-bootstrap'
 import { v4 as uuid } from 'uuid'
 
 import Instructions from './Instructions'
@@ -43,12 +44,14 @@ const TodoApp = () => {
 	}
 
 	return (
-		<div>
+		<Col>
 			{todos.length === 0 && <Instructions /> }
 			<AddTodoForm addTodo={addTodo} />
 			<TodoList todos={todos} updateTodo={updateTodo} deleteTodo={deleteTodo} />
-			{todos.length > 0 && <button onClick={handleClearAll} >Clear All</button>}
-		</div>
+			<Row className='justify-content-end'>
+				<Col xs="2">{todos.length > 0 && <Button className="" onClick={handleClearAll}>Clear All</Button>}</Col>
+			</Row>
+		</Col>
 	);
 }
 

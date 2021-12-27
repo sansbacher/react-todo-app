@@ -1,10 +1,11 @@
 import React from 'react'
+import {Col, Image} from 'react-bootstrap'
 
 const AboutPage = () => {
 	return (
-		<div>
+		<Col>
 			<div className="text-center">
-				<img src="img/checklist-logo.png" alt="A checklist" />
+				<Image className="pb-2" src="img/checklist-logo.png" alt="A checklist" />
 				<p><strong>The React based Todo Task Manager!</strong></p>
 			</div>
 			<div>
@@ -22,8 +23,7 @@ const AboutPage = () => {
 				</p>
 
 			</div>
-
-		</div>
+		</Col>
 	);
 }
 

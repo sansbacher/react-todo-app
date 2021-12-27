@@ -1,5 +1,7 @@
 import React from 'react'
 import {Routes, Route, NavLink} from 'react-router-dom'
+import { Container, Row, Col, Navbar, Nav} from 'react-bootstrap'
+import {Check2All} from 'react-bootstrap-icons'
 
 import TodoApp from './components/TodoApp'
 import AboutPage from './components/AboutPage'
@@ -8,26 +10,44 @@ import HelpPage from './components/HelpPage'
 function App() {
 	
 	return (
-		<div className="medium-container">
-			<nav>
-				<span className="margin-right">LOGO</span>
-				<NavLink className="margin-right" to="/">HOME</NavLink>
-				<NavLink className="margin-right" to="/help">HELP</NavLink>
-				<NavLink className="margin-right" to="/about">ABOUT</NavLink>
-			</nav>
-			<header>
-				<h1>React Todo App</h1>
-				<p><em>Manage all your have Todo!</em></p>
-			</header>
-			<Routes>
-				<Route path="/" element={<TodoApp />} />
-				<Route path="about" element={<AboutPage />} />
-				<Route path="help" element={<HelpPage />} />
-			</Routes>
-			<footer>
-				<p>Source code on Github</p>
-			</footer>
-		</div>
+		<Container>
+			<Navbar bg="dark" variant="dark" sticky="top">
+				<Container>
+					<Navbar.Brand><Check2All size={24} /></Navbar.Brand>
+					<Nav className="justify-content-end">
+						<Nav.Item><NavLink className="me-2 color-white" to="/">HOME</NavLink></Nav.Item>
+						<Nav.Item><NavLink className="me-2 color-white" to="/help">HELP</NavLink></Nav.Item>
+						<Nav.Item><NavLink className="color-white" to="/about">ABOUT</NavLink></Nav.Item>
+					</Nav>
+				</Container>
+			</Navbar>
+			<Row>
+				<Col>
+					<header className="p-5 mb-4 bg-light rounded-3 text-center">
+						<h1>React Todo App</h1>
+						<p><em>Manage all your have Todo!</em></p>
+					</header>
+				</Col>
+			</Row>
+			<Row className="pb-5">
+				<Routes>
+					<Route path="/" element={<TodoApp />} />
+					<Route path="about" element={<AboutPage />} />
+					<Route path="help" element={<HelpPage />} />
+				</Routes>
+			</Row>
+			<Container className="footer">
+				<Row>
+					<Col>
+						<div className='text-center bg-light footer-content'>
+							<span>Source code on <a href="https://github.com/sansbacher/todo-task-manager" target="_blank" rel="noreferrer">Github</a></span>
+							<br />
+							<span>Made with React and React Bootstrap, but otherwise handmade - plus any other packages imported...</span>
+						</div>
+					</Col>
+				</Row>
+			</Container>
+		</Container>
 	);
 }
 
