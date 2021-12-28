@@ -1,16 +1,19 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {Row, Col, Form, Button} from 'react-bootstrap'
 import {PlusLg} from 'react-bootstrap-icons'
 import { stripHtml } from 'string-strip-html'
 
-const AddTodoForm = ({addTodo}) => {
+import TodoContext from '../context/todo-context'
+
+const AddTodoForm = () => {
+	const {dispatch} = useContext(TodoContext)
 	const [description, setDescription] = useState('')
 
 	const handleSubmit = (evt) => {
 		evt.preventDefault()
-		const input = description ? stripHtml(description).result.trim() : ''
-		if (input === '') return;
-		addTodo(input)
+		const cleanedInput = description ? stripHtml(description).result.trim() : ''
+		if (cleanedInput === '') return;
+		dispatch({type: 'ADD_TODO', description: cleanedInput})
 		setDescription('')
 	}
 

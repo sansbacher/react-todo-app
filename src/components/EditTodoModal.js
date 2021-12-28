@@ -1,9 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { Form, Button, Modal } from 'react-bootstrap'
 import { stripHtml } from 'string-strip-html'
 
-const EditTodoModal = (props) => {
-	const {originalTodo} = props
+import TodoContext from '../context/todo-context'
+
+const EditTodoModal = ({modalVisible, closeModal, originalTodo}) => {
+	const {dispatch} = useContext(TodoContext)
 	const [newDescription, setNewDescription] = useState(originalTodo.description)
 	
 	const handleEditTodo = (event) => {
@@ -11,15 +13,17 @@ const EditTodoModal = (props) => {
 		const description = newDescription ? stripHtml(newDescription).result.trim() : ''
 		
 		if (description !== '' && description !== originalTodo.description) {
-			props.updateTodo(originalTodo._id, {...originalTodo, description})
+			const newTodo = {...originalTodo, description}
+			dispatch({type: 'UPDATE_TODO', id: originalTodo._id, todo: newTodo})
 		}
-		props.closeModal()
+		closeModal()
 	}
 
 	// For some reason Chrome took ages to display the Modal (and showed a Warning in the Console: React instrumentation encountered an error: RangeError: Maximum call stack size exceeded)
 	// When Animations were enabled. Didn't happen in Firefox, so just disabled animations.
+	// Also, under Chrome the Modal now stalls when opened and the Console shows: Uncaught RangeError: Maximum call stack size exceeded, then it works fine. Only happens once. FF, Edge, and Opera are fine.
 	return (
-		<Modal show={props.modalVisible} onHide={props.closeModal} animation={false}>
+		<Modal show={modalVisible} onHide={closeModal} animation={false}>
 			<Modal.Header closeButton>
 				<Modal.Title>Edit Todo Item</Modal.Title>
 			</Modal.Header>
@@ -37,7 +41,7 @@ const EditTodoModal = (props) => {
 				</Form>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button variant="secondary" onClick={props.closeModal}>
+				<Button variant="secondary" onClick={closeModal}>
 					Cancel
 				</Button>
 				<Button variant="primary" onClick={handleEditTodo}>
