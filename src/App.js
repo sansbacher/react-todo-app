@@ -8,16 +8,15 @@ import AboutPage from './components/AboutPage'
 import HelpPage from './components/HelpPage'
 
 function App() {
-	
 	return (
 		<Container>
 			<Navbar bg="dark" variant="dark" sticky="top">
 				<Container>
 					<Navbar.Brand><Check2All size={24} /></Navbar.Brand>
 					<Nav className="justify-content-end">
-						<Nav.Item><NavLink className="me-2 color-white" to="/">HOME</NavLink></Nav.Item>
-						<Nav.Item><NavLink className="me-2 color-white" to="/help">HELP</NavLink></Nav.Item>
-						<Nav.Item><NavLink className="color-white" to="/about">ABOUT</NavLink></Nav.Item>
+						<Nav.Item><NavLink className="me-2 link-white" to="/">HOME</NavLink></Nav.Item>
+						<Nav.Item><NavLink className="me-2 link-white" to="/help">HELP</NavLink></Nav.Item>
+						<Nav.Item><NavLink className="link-white" to="/about">ABOUT</NavLink></Nav.Item>
 					</Nav>
 				</Container>
 			</Navbar>
@@ -31,7 +30,7 @@ function App() {
 			</Row>
 			<Row className="pb-5">
 				<Routes>
-					<Route path="/" element={<TodoApp />} />
+					<Route path="" element={<TodoApp />} />
 					<Route path="about" element={<AboutPage />} />
 					<Route path="help" element={<HelpPage />} />
 				</Routes>

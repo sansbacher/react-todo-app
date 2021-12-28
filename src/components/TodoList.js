@@ -2,13 +2,15 @@ import React, {useState} from 'react'
 import { Form, ListGroup, ListGroupItem, Button, Row, Col } from 'react-bootstrap'
 import {Pencil, Trash} from 'react-bootstrap-icons'
 
+// import TodoContext from '../context/todo-context'
 import EditTodoModal from './EditTodoModal'
 
 const TodoList = ({todos, updateTodo, deleteTodo}) => {
+	// const {todosX} = useContext(TodoContext)
 	const [modalVisible, setModalVisible] = useState(false)
 	const [originalTodo, setOriginalTodo] = useState({})
 
-	const closeModal = () => {setModalVisible(false)}
+	const closeModal = () => setModalVisible(false)
 
 	const handleEditTodo = (todo) => {
 		setOriginalTodo(todo)

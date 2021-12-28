@@ -23,8 +23,13 @@ body {
 	color: black;
 }
 
-.color-white, .color-white:hover {
+.link-white {
 	color: #dddddd;
+	text-decoration: none;
+}
+
+.link-white:hover {
+	color: #ffffff;
 	text-decoration: none;
 }
 
