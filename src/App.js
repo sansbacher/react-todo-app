@@ -6,6 +6,9 @@ import {Check2All} from 'react-bootstrap-icons'
 import TodoApp from './components/TodoApp'
 import AboutPage from './components/AboutPage'
 import HelpPage from './components/HelpPage'
+import LoginPage from './components/LoginPage'
+import RegisterPage from './components/RegisterPage'
+import NotFoundPage from './components/NotFoundPage'
 
 function App() {
 	return (
@@ -33,6 +36,12 @@ function App() {
 					<Route path="" element={<TodoApp />} />
 					<Route path="about" element={<AboutPage />} />
 					<Route path="help" element={<HelpPage />} />
+					<Route path="login" element={<LoginPage />} />
+					<Route path="login" element={<LoginPage />} />
+					<Route path="register" element={<RegisterPage />} />
+					
+					<Route path="*" element={<NotFoundPage />} />
+
 				</Routes>
 			</Row>
 			<Container className="footer">

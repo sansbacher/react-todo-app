@@ -1,13 +1,12 @@
 import React from 'react'
-import {Col, Image, ListGroup, ListGroupItem} from 'react-bootstrap'
+import {Col, ListGroup, ListGroupItem} from 'react-bootstrap'
+
+import Logo from './Logo'
 
 const HelpPage = () => {
 	return (
 		<Col>
-			<div className="text-center">
-				<Image className="pb-2" src="img/checklist-logo.png" alt="A checklist" />
-				<p><strong>The React based Todo Task Manager!</strong></p>
-			</div>
+			<Logo />
 			<div>
 				<p>How to use this app:</p>
 				<ListGroup numbered className="mb-2">

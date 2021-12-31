@@ -1,13 +1,12 @@
 import React from 'react'
-import {Col, Image} from 'react-bootstrap'
+import {Col} from 'react-bootstrap'
+
+import Logo from './Logo'
 
 const AboutPage = () => {
 	return (
 		<Col>
-			<div className="text-center">
-				<Image className="pb-2" src="img/checklist-logo.png" alt="A checklist" />
-				<p><strong>The React based Todo Task Manager!</strong></p>
-			</div>
+			<Logo />
 			<div>
 				<p>
 					This is a recreation of the Vanilla JS Task Manager front-end written in <a href="https://reactjs.org/" target="_blank" rel="noreferrer">React</a>. It uses Create React App, and React-Bootstrap. Nothing fancy, but mainly just to test various React app components.
