@@ -1,7 +1,6 @@
-import React, { useReducer, useEffect, useContext } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import {Col, Row, Button} from 'react-bootstrap'
 
-import AuthContext from '../context/auth-context'
 import TodoContext from '../context/todo-context'
 import todoReducer from '../reducers/todo'
 import Instructions from './Instructions'
@@ -12,7 +11,6 @@ const LS_TODO_NAME = 'todo'			// The LocalStorage name
 
 
 const TodoApp = () => {
-	const {auth} = useContext(AuthContext)
 	const [todos, dispatch] = useReducer(todoReducer, [])
 
 	// Initial seeding of Todos from localStorage on first run (once) due to empty dependencies
@@ -21,7 +19,6 @@ const TodoApp = () => {
 		if (importedTodos) {
 			dispatch({type: 'SET_TODOS', todos: JSON.parse(importedTodos)})
 		}
-		console.log('logged in!', auth);
 	}, [])
 
 	// For actual LocalStorage usage should use this, which updates whenever todos array is modified

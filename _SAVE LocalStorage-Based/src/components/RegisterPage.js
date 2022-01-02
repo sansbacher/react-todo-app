@@ -1,18 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState } from 'react'
 import { Row, Col, Form, Button } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import { setCookie, apiFetch } from '../utils/util'
 
-import AuthContext from '../context/auth-context'
 import Logo from './Logo'
-import ErrorAlert from './ErrorAlert'
 
 const RegisterPage = () => {
-	const controller = new AbortController()
-	const [formData, setFormData] = useState({ name: '', email: '', password: '', age: ''})
-	const [error, setError] = useState({present: false, heading: '', message: ''})
-	const {setAuth} = useContext(AuthContext)
 	const navigate = useNavigate()
+	const [formData, setFormData] = useState({ name: '', email: '', password: '', age: ''})
 
 	// Single event handler for any change to all "text" input fields
 	const handleInputChange = (event) => {
@@ -20,37 +14,16 @@ const RegisterPage = () => {
 		setFormData({...formData, [name]: value})		// Update the current formData to include the new "name": value
 	}
 
-	const handleSubmit = async (event) => {
+	const handleSubmit = (event) => {
 		event.preventDefault()
-		setError({present: false})
-		const {success, response, data} = await apiFetch({method: 'POST', url: '/users', body: formData, controller})
-		if (success) {
-			setCookie('task_manager_auth_token', data.token, 15)
-			setAuth({...data})		// Should contain .token and .user
-			navigate('/')
-		} else {
-			console.log({response, data});
-			setError({
-				present: true,
-				heading: 'ERROR Creating new user!',
-				message: `Check name / email / password and try again! ${response.statusText} - ${response.status}`
-			})
-		}
+		console.log(formData);
+		navigate('/')
 	}
-
-	// Just return a clean-up function to abort the Fetch if it's in progress if the page changes
-	useEffect(() => {
-		return () => {
-			controller.abort()
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[])
 
 	return (
 		<Col md={{ span: 7, offset: 3 }}>
 			<Row>
 				<Logo message="Login to the React based Todo Task Manager!" />
-				{error.present && <ErrorAlert {...error} />}
 				<p>If you already have an account you can <Link to="/login">Login here</Link>, otherwise please register:</p>
 				<Form onSubmit={handleSubmit}>
 					<Row>
