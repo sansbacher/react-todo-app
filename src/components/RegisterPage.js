@@ -3,7 +3,7 @@ import { Row, Col, Form, Button } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { setCookie, apiFetch } from '../utils/util'
 
-import AuthContext from '../context/auth-context'
+import AuthContext from 'context/auth-context'
 import Logo from './Logo'
 import ErrorAlert from './ErrorAlert'
 
@@ -29,7 +29,7 @@ const RegisterPage = () => {
 			setAuth({...data})		// Should contain .token and .user
 			navigate('/')
 		} else {
-			console.log({response, data});
+			// Unfortunately the API, as written, is very uninformative of what the problem is...
 			setError({
 				present: true,
 				heading: 'ERROR Creating new user!',

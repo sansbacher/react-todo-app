@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react'
 import { Form, Button, Modal } from 'react-bootstrap'
 import { stripHtml } from 'string-strip-html'
 
-import TodoContext from '../context/todo-context'
+import TodoContext from 'context/todo-context'
 
 const EditTodoModal = ({modalVisible, closeModal, originalTodo}) => {
 	const {dispatch} = useContext(TodoContext)

@@ -1,34 +1,52 @@
-import React, { useReducer, useEffect, useContext } from 'react'
+import React, { useState, useReducer, useEffect, useContext } from 'react'
 import {Col, Row, Button} from 'react-bootstrap'
+import { apiFetch } from 'utils/util'
 
-import AuthContext from '../context/auth-context'
-import TodoContext from '../context/todo-context'
-import todoReducer from '../reducers/todo'
-import Instructions from './Instructions'
+import AuthContext from 'context/auth-context'
+import TodoContext from 'context/todo-context'
+import todoReducer from 'reducers/todo'
+import ErrorAlert from 'components/ErrorAlert'
+import Logo, {Italics} from './Logo'
 import AddTodoForm from './AddTodoForm'
 import TodoList from './TodoList'
-
-const LS_TODO_NAME = 'todo'			// The LocalStorage name
 
 
 const TodoApp = () => {
 	const {auth} = useContext(AuthContext)
 	const [todos, dispatch] = useReducer(todoReducer, [])
+	const [isLoading, setIsLoading] = useState(true)			// Because we start loading via useEffect on initial render
+	const [error, setError] = useState({present: false, heading: '', message: ''})
 
-	// Initial seeding of Todos from localStorage on first run (once) due to empty dependencies
+	// Initial seeding of Todos from API on first run (once) due to empty dependencies
 	useEffect(() => {
-		const importedTodos = localStorage.getItem(LS_TODO_NAME)
-		if (importedTodos) {
-			dispatch({type: 'SET_TODOS', todos: JSON.parse(importedTodos)})
+		const controller = new AbortController()			// To properly cancel the fetch() if the component unmounts
+		let ignore = false									// So we don't try to update the Error if it's unmounted
+
+		async function fetchInitialData() {
+			setIsLoading(true)
+			setError({present: false})
+			const {success, response, data} = await apiFetch({method: 'GET', url: '/tasks', controller, token: auth.token})
+			if (success) {
+				dispatch({type: 'SET_TODOS', todos: data})
+				setIsLoading(false)
+			} else {
+				if (!ignore) {
+					setError({
+						present: true,
+						heading: 'ERROR Loading Tasks!',
+						message: `Network Error or Logout/Login and try again! ${response.statusText} - ${response.status}`
+					})
+				}
+			}
 		}
-		console.log('logged in!', auth);
-	}, [])
-
-	// For actual LocalStorage usage should use this, which updates whenever todos array is modified
-	// But once we move to APIs we will need to add API POST/PATCH/DELETE calls to the reducer somehow.
-	useEffect(() => {
-		localStorage.setItem(LS_TODO_NAME, JSON.stringify(todos))
-	}, [todos])
+		fetchInitialData()
+		
+		// Return a clean-up function to abort the Fetch if it's in progress as the page changes
+		return () => {
+			ignore = true
+			controller.abort()
+		}
+	}, [])								// eslint-disable-line react-hooks/exhaustive-deps
 
 	const handleClearAll = () => {
 		// In the API we don't have a /tasks/deleteAll end-point, but here we can do it all at once
@@ -39,14 +57,22 @@ const TodoApp = () => {
 	return (
 		<TodoContext.Provider value={{todos, dispatch}}>
 			<Col>
-				{todos.length === 0 && <Instructions /> }
-				<AddTodoForm />
-				<TodoList />
-				<Row className='justify-content-end'>
-					<Col xs="2">
-						{todos.length > 0 && <Button onClick={handleClearAll}>Clear All</Button>}
-					</Col>
-				</Row>
+				{error.present && <ErrorAlert {...error} />}
+				{isLoading ? (
+					<Logo message="Please wait. Loading..." Flair={Italics} />
+				) : (
+					<>
+						{todos.length === 0 && <Logo message="Enter anything you need to do, when you're done check it off!" /> }
+						
+						<AddTodoForm setError={setError} />
+						<TodoList />
+						<Row className='justify-content-end'>
+							<Col xs="2">
+								{todos.length > 0 && <Button onClick={handleClearAll}>Clear All</Button>}
+							</Col>
+						</Row>
+					</>
+				)}
 			</Col>
 		</TodoContext.Provider>
 	);

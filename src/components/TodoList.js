@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react'
 import { Form, ListGroup, ListGroupItem, Button, Row, Col } from 'react-bootstrap'
 import {Pencil, Trash} from 'react-bootstrap-icons'
 
-import TodoContext from '../context/todo-context'
+import TodoContext from 'context/todo-context'
 import EditTodoModal from './EditTodoModal'
 
 const TodoList = () => {

@@ -3,7 +3,7 @@ import { Row, Col, Form, Button } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { getCookie, setCookie, apiFetch } from '../utils/util'
 
-import AuthContext from '../context/auth-context'
+import AuthContext from 'context/auth-context'
 import Logo from './Logo'
 import ErrorAlert from './ErrorAlert'
 
@@ -46,13 +46,12 @@ const LoginPage = () => {
 
 	}
 
-	// Just return a clean-up function to abort the Fetch if it's in progress if the page changes
+	// Just return a clean-up function to abort the Fetch if it's in progress as the page changes
 	useEffect(() => {
 		return () => {
 			controller.abort()
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[])
+	},[])		// eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
 		<Col md={{ span: 7, offset: 3 }}>
