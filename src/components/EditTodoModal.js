@@ -1,20 +1,16 @@
-import React, {useState, useContext} from 'react'
+import React, {useState} from 'react'
 import { Form, Button, Modal } from 'react-bootstrap'
 import { stripHtml } from 'string-strip-html'
 
-import TodoContext from 'context/todo-context'
-
-const EditTodoModal = ({modalVisible, closeModal, originalTodo}) => {
-	const {dispatch} = useContext(TodoContext)
+const EditTodoModal = ({modalVisible, closeModal, originalTodo, updateTodo}) => {
 	const [newDescription, setNewDescription] = useState(originalTodo.description)
 	
 	const handleEditTodo = (event) => {
-		event && event.preventDefault()
+		event.preventDefault()
 		const description = newDescription ? stripHtml(newDescription).result.trim() : ''
 		
 		if (description !== '' && description !== originalTodo.description) {
-			const newTodo = {...originalTodo, description}
-			dispatch({type: 'UPDATE_TODO', id: originalTodo._id, todo: newTodo})
+			updateTodo({...originalTodo, description})
 		}
 		closeModal()
 	}

@@ -11,12 +11,10 @@ const Italics = ({children}) => (			// Can be passed in as the Flair={Italics} p
 
 const Logo = ({ message = 'The React based Todo Task Manager!', Flair=Strong}) => {
 	return (
-		<>
-			<div className="text-center">
-				<Image className="pb-2" src="img/checklist-logo.png" alt="A checklist" />
-				<p><Flair>{message}</Flair></p>
-			</div>
-		</>
+		<div className="text-center">
+			<Image className="pb-2" src="img/checklist-logo.png" alt="A checklist" />
+			<p><Flair>{message}</Flair></p>
+		</div>
 	);
 }
 

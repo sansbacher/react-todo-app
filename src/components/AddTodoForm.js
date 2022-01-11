@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState, useContext, useEffect, useRef} from 'react'
 import {Row, Col, Form, Button} from 'react-bootstrap'
 import {PlusLg} from 'react-bootstrap-icons'
 import { stripHtml } from 'string-strip-html'
@@ -9,10 +9,11 @@ import AuthContext from 'context/auth-context'
 
 const AddTodoForm = ({setError}) => {
 	const controller = new AbortController()			// To properly cancel the fetch() if the component unmounts
+	const ignoreRef = useRef(false)						// So we don't try to update the Error if it's unmounted
 	const {dispatch} = useContext(TodoContext)
-	const {auth} = useContext(AuthContext)
+	const {auth: {token}} = useContext(AuthContext)				// Double destructure auth.token
 	const [description, setDescription] = useState('')
-
+	
 	const handleSubmit = async (evt) => {
 		evt.preventDefault()
 		setError({present: false})
@@ -22,11 +23,12 @@ const AddTodoForm = ({setError}) => {
 		}
 		if (newTodo.description === '') return;
 
-		const {success, response, data} = await apiFetch({method: 'POST', url: '/tasks', controller, token: auth.token, body: newTodo})
-		if (success) {
+		ignoreRef.current = false
+		const {success, response, data} = await apiFetch({method: 'POST', url: '/tasks', controller, token, body: newTodo})
+		if (success && !ignoreRef.current) {
 			dispatch({type: 'ADD_TODO', todo: data})
 			setDescription('')
-		} else {
+		} else if (!ignoreRef.current) {
 			setError({
 				present: true,
 				heading: 'ERROR Adding Task!',
@@ -38,6 +40,7 @@ const AddTodoForm = ({setError}) => {
 	// Just return a clean-up function to abort the Fetch if it's in progress as the page changes
 	useEffect(() => {
 		return () => {
+			ignoreRef.current = true
 			controller.abort()
 		}
 	},[])		// eslint-disable-line react-hooks/exhaustive-deps

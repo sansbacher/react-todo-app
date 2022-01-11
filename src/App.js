@@ -22,13 +22,13 @@ function App() {
 		setAuth({})
 		// The /users/logout endpoint returns no data, but log it if there's an issue - though we really don't care.
 		apiFetch({method: 'POST', url: '/users/logout', token: auth.token, discard: true})
-			.then((result) => {
-				const {success, response} = result
+			.then(({success, response}) => {
 				if (!success) {console.log('Error logging out!', response)}		// eslint-disable-line no-console
 			})
 		navigate('/login')
 	}
 
+	// Most of this is the same/static, and just the middle bit changes depending on the route
 	return (
 		<AuthContext.Provider value={{auth, setAuth}}>
 			<Container>
