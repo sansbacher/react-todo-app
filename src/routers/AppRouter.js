@@ -9,6 +9,7 @@ import LoginPage from 'components/LoginPage'
 import RegisterPage from 'components/RegisterPage'
 import NotFoundPage from 'components/NotFoundPage'
 
+// Note: <BrowserRouter> is in index.js, which has basename="/somePrefixPath" set
 const AppRouter = () => {
 	return (
 		<Routes>
