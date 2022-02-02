@@ -17,7 +17,7 @@ const HelpPage = () => {
 					<ListGroupItem as="li">If you're tired of seeing all the things you've done: click Delete to remove the.</ListGroupItem>
 					<ListGroupItem as="li">Give up? No problem, click Clear All and you'll have plenty of free time.</ListGroupItem>
 				</ListGroup>
-				<p>A Helpful page to test routing with react.</p>
+				<p>There's no editing of your Profile, but you can use the <a href="/profile.html" target="_blank" rel="noopener noreferrer">Vanilla JS version</a> of the Profile page.</p>
 			</div>
 
 		</Col>

@@ -48,7 +48,7 @@ function App() {
 				<Row>
 					<Col>
 						<div className='text-center bg-light footer-content'>
-							<span>Source code on <a href="https://github.com/sansbacher/todo-task-manager" target="_blank" rel="noreferrer">Github</a></span>
+							<span>Source code on <a href="https://github.com/sansbacher/react-todo-app" target="_blank" rel="noreferrer">Github</a></span>
 							<br />
 							<span>Made with React and React Bootstrap, but otherwise handmade - plus any other packages imported...</span>
 						</div>

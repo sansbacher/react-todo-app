@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# React Todo Task Manager App
+![Task list logo](images/checklist-title-react.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+It seems everyone writes a Todo / Task Manager app when learning React - this is a one of those, created using Create React App and using Hooks.
 
-## Available Scripts
+This version is generally based on the [Vanilla JavaScript Todo / Task Manager app](https://github.com/sansbacher/todo-task-manager), but requires the API to function. I did keep the version just before integrating the API code, so you can reference the [LocalStorage Version](https://github.com/sansbacher/react-todo-app/tree/main/_SAVE%20LocalStorage-Based) if you want.
 
-In the project directory, you can run:
+![Task Manager screen shot](images/screenshot-react.png)
 
-### `yarn start`
+To see the evolution of the app as it was built you can clone this repo and then checkout one of the commits using the Commit Hash. You can see them with `git log --oneline` and checkout one of them with the hash, such as: `git checkout 3db2915`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Here is a table of commits:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Commit Hash | What you will find
+------------|-------------------
+f01a909 | Adjusted app to be served from a sub-path, not the webroot
+047c7d6 | Added API functionality for Deleting Tasks
+ed69ac6 | Added API functionality for Get Tasks and Add Task
+14a844a | Added API for login, register, and logout functions
+3db2915 | Added skeletal Login and Register pages. Final before adding API
+b08ebb8 | Refactored for Context/useContext instead of prop-drilling
+cad304b | Refactored for useReducer instead of useState
+0169d23 | Added React-Bootstrap, including Modal, and styled
+20a8437 | Added React Router and sample navigation pages
+f960d1b | Added basic LocalStorage save/restore
+3fba159 | Working as DOM-based, no styles or persistence
+c1c06d8 | Initial static app skeleton - main page
+abd96d6 | Ready to start React Todo App, LocalStorage based
+c1810f1 | Initialize project using Create React App
 
-### `yarn test`
+The style/look is from [React Bootstrap](https://react-bootstrap.github.io/) - pretty plain. I didn't add the Profile management, but has Register and Login obviously (it uses the same login as the [Vanilla JS version](https://sansbacher-task-manager.herokuapp.com/) so you can modify your profile there). All the basic CRUD functions are present: adding, deleting, updating, and viewing Tasks. But not the "extra" stuff like sorting, pagination, etc.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I mainly use this to test and try-out new modules or methods, and leave them as a reminder for myself.
 
-### `yarn build`
+The React App should work in any modern browser, like Chrome, Opera Chromium, or Firefox - even Chrome on Android or Safari on iOS. It can't be used with Internet Explorer, but then neither should you.  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+There is a **LIVE** version hosted on Heroku: [API-Based React Todo App](https://sansbacher-task-manager.herokuapp.com/API-React-Based/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+I hope this is useful for someone!

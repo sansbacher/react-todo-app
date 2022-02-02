@@ -1,5 +1,5 @@
 import React from 'react'
-import {Col} from 'react-bootstrap'
+import { Col } from 'react-bootstrap'
 
 import Logo from './Logo'
 
@@ -9,10 +9,10 @@ const AboutPage = () => {
 			<Logo />
 			<div>
 				<p>
-					This is a recreation of the Vanilla JS Task Manager front-end written in <a href="https://reactjs.org/" target="_blank" rel="noreferrer">React</a>. It uses Create React App, and React-Bootstrap. Nothing fancy, but mainly just to test various React app components.
+					This is a recreation of the Vanilla JS Task Manager front-end written in <a href="https://github.com/sansbacher/react-todo-app" target="_blank" rel="noreferrer">React</a>. It uses Create React App, and React-Bootstrap. Nothing fancy, but mainly just to test various React app components.
 				</p>
 				<p>
-					The function and form is mostly identical to the <a href="https://github.com/sansbacher/todo-task-manager" target="_blank" rel="noreferrer">Vanilla Javascript versions</a>, but implemented in React. It should function the same since it targets the same Node/Express REST API back-end. However it will only implement the initial functions (not the Avatar or Sorting/Paging features).
+					The function and form is mostly identical to the <a href="https://github.com/sansbacher/todo-task-manager" target="_blank" rel="noreferrer">Vanilla Javascript versions</a>, but implemented in React. It should function the same since it targets the same Node/Express REST API back-end. However it will only implement the initial functions (not the Avatar or Sorting/Paging features). It uses the same logins/users even.
 				</p>
 				<p>
 					Initially it saved the data in the DOM, then LocalStorage, then routing was added, and Bootstrap, until it could call the API. The Git history should show these versions, but they're not separate.
